@@ -1,0 +1,15 @@
+set_io CLK_48			30
+
+set_io GPIOA			1		# GPIOA / I2C CLOCK
+set_io GPIOB			8		# GPIOB / I2C DATA
+set_io GPIOC			6		# GPIOC / FPGA TRANSMIT
+set_io GPIOD			5		# GPIOD / FPGA RECEIVE
+
+set_io SPI_MOSI		12		# GPIOE / CSPI_SO
+set_io SPI_SCK			18		# GPIOF / CSPI_SCK
+#set_io SPI_SS_FLASH	14		# CSPI_SS (flash)
+set_io SPI_SS_RAM		31		# CSPI_SS_RAM (fram)
+set_io SPI_MISO		13		# GPIOG / CSPI_SI
+
+#set_io WPN				26		# GPIOH / low write protects FRAM
+#set_io RESETN			29		# pull low to trigger reconfiguration
