@@ -33,10 +33,10 @@ Zwölf modules are implemented as a versatile package that can be soldered surfa
 
 #### Pinout
 
-``
+```
 1  2  3  4  5  6
 7  8  9  10 11 12
-``
+```
 
 | Pin | GPIO | Primary Function | Alternative Function(s) |
 |-----|------|------------------|-------------------------|
