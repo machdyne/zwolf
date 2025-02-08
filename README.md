@@ -8,6 +8,8 @@ Zwölf is a work-in-progress open microcontroller platform for simple embedded a
 
 This repo describes the abstract Zwölf MCU/CPU and will provide specifications and implementations for physical modules. **This project is under active development and is not entirely functional. Specifications are subject to change.**
 
+See [this blog post](https://machdyne.com/2024/11/15/zwolf-mcu-platform/) for more details.
+
 ## Project Components
 
  * SOC - Zwölf implementation in Verilog (for FPGAs)
