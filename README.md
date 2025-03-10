@@ -48,10 +48,10 @@ Zwölf modules are implemented as a versatile package that can be soldered surfa
 | 4 | D | Local I2C SDA (master) | GPIO / UART TX |
 | 5 | - | GND | Ground |
 | 6 | - | 3V3 | Power |
-| 7 | E | GPIO | module-specific / USB\_PU / UART TX |
-| 8 | F | GPIO | module-specific / USB\_DP |
-| 9 | G | GPIO | module-specific / USB\_DN |
-| 10 | H | GPIO | module-specific / INTN |
+| 7 | E | module-specific | GPIO / USB\_PU / UART TX |
+| 8 | F | module-specific | GPIO / USB\_DP |
+| 9 | G | module-specific | GPIO / USB\_DN |
+| 10 | H | module-specific | GPIO / INTN |
 | 11 | - | RESETN | device reset (active low) |
 | 12 | - | WPN | write protect (active low) |
 
