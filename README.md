@@ -4,7 +4,7 @@
 
 Zwölf is a work-in-progress open microcontroller platform for simple embedded applications that require long-term data retention and/or long-term functionality.
 
-![ls2](docs/ls2_render.png)
+![ls2](https://github.com/machdyne/zwolf/blob/ff47d54055e88f3f4c0c47e0ca36c7c54295badf/docs/ls2_render.png)
 
 This repo describes the abstract Zwölf MCU/CPU and will provide specifications and implementations for physical modules. **This project is under active development and is not entirely functional. Specifications are subject to change.**
 
