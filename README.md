@@ -87,13 +87,13 @@ Finally, you can reset the MCU to run the program.
 For example, to program a byte at a given address:
 
 ```
-LI <addr_hi>	; load high address into a
-SWAP			; put it in b
-LI <addr_li>	; load low address into a
-SSP				; set stack pointer to b:a
-LI <data>		; load lower 7-bits into reg a
-SH 				; set high bit if necessary
-PUSH			; addr = a
+LI <addr_hi>    ; load high address into a
+SWAP            ; put it in b
+LI <addr_li>    ; load low address into a
+SSP             ; set stack pointer to b:a
+LI <data>       ; load lower 7-bits into reg a
+SH              ; set high bit if necessary
+PUSH            ; addr = a
 ```
 
 There is a script that generates a list of Howl commands that use the method described above in order to load a program into a module:
