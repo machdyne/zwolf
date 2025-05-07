@@ -100,7 +100,7 @@ There is a script that generates a list of Howl commands that use the method des
 
 ```
 $ python3 tools/b2h.py output/counter.bin > output/counter.asc
-$ cat counter.asc > /dev/ttyACM0
+$ cat output/counter.asc > /dev/ttyACM0
 ```
 
 ### CPU
