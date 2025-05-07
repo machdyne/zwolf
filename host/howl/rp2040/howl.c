@@ -29,7 +29,7 @@
 
 #define ENABLE_PULLUPS	false // zwolf hosts usually have external pullups
 
-#define I2C_BAUDRATE	10*1000	// 10KHz
+#define I2C_BAUDRATE	100*1000	// 100KHz
 #define I2C_TIMEOUT 	1000000	// us = 1000ms = 1s
 #define BUFLEN 32
 

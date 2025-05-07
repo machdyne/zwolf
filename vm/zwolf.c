@@ -67,7 +67,7 @@ void zw_cpu_step(void) {
 void zw_cpu_execute(uint8_t op) {
 
 	if (zw_debug)
-		printf("zw_cpu_execute [pc:%.4x sp:%.4x a: %.2x b: %.2x] %.2x\n",
+		printf("zw_cpu_execute [pc:%4x sp:%4x a: %2x b: %2x] op: %2x\n",
 			pc, sp, a, b, op);
 
 	// NOP (clears SR)
@@ -102,7 +102,7 @@ void zw_cpu_execute(uint8_t op) {
 		b = t;
 		++pc;
 
-	// LPC
+	// LPC (load program counter)
 	} else if (op == ZW_OP_LPC) {
 
 		b = (pc >> 8) & 0xff; a = (pc & 0xff);
@@ -118,6 +118,12 @@ void zw_cpu_execute(uint8_t op) {
 	} else if (op == ZW_OP_SIO) {
 
 		zw_io_store(b, a);
+		++pc;
+
+	// SSP (set stack pointer to b:a)
+	} else if (op == ZW_OP_SSP) {
+
+		sp = ((b << 8) & 0xff00) | (a & 0xff);
 		++pc;
 
 	// LI (load immediate lower 7 bits into reg a)
