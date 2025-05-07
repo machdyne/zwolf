@@ -33,12 +33,12 @@ Note: There is an onboard LED that is mapped to GPIOH.
 If you're using WCH-LinkE, connect 3V3, GND and wire SWIO to SWDIO and then:
 
 ```
-make
+$ make
 ```
 
 ### Werkzeug or Raspberry Pi Pico
 
-| Zwolf | RP2040 |
+| Zwölf | RP2040 |
 |-------|--------|
 | 3V3 | 3V3 |
 | GND | GND |
