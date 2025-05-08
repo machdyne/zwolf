@@ -38,10 +38,14 @@ class Assembler():
         self.genpass = False
 
     def assemble(self, infile, outfile):
+        self.lines = []
+        self.macros = {}
         self.output_bin = open(outfile, "wb")
         self.output_hex = open(outfile + ".hex", "w")
-        self.parse(infile, genpass=False)
-        self.parse(infile, genpass=True)
+        self.preprocess(infile, finalpass=False)
+        self.preprocess(infile, finalpass=True)
+        self.parse(genpass=False)
+        self.parse(genpass=True)
 
     def gen(self, data):
         if self.genpass:
@@ -50,60 +54,94 @@ class Assembler():
             self.output_hex.write("{0:02x}\n".format(data))
         self.pc = self.pc + 1
 
-    def parse(self, filename, genpass):
-        self.pc = 0
-        self.genpass = genpass
+    def preprocess(self, filename, finalpass=False):
+        macro = None
         with open(filename) as f:
             for l in f.readlines():
-
-                waslabel = False
-
                 l = l.strip()
-
                 la = l.partition(';')[0]
                 ll = la.split()
-
                 if len(ll) == 0: continue
-
-                lb = ll[0].split(':')
-
-                if len(lb) > 1:
-                    hi = (self.pc >> 8) & 0xff
-                    lo = self.pc & 0xff
-                    self.labels[lb[0] + '_hi'] = hi
-                    self.labels[lb[0] + '_lo'] = lo
-                    print(" " + lb[0] + "_hi @ {0:02x}".format(hi))
-                    print(" " + lb[0] + "_lo @ {0:02x}".format(lo))
+                if ll[0] == '&':
+                    print("include " + ll[1])
+                    self.preprocess(ll[1], finalpass=finalpass)
+                if ll[0] == '{':    
+                    print("macro_start: " + ll[1])
+                    macro = ll[1]
+                    self.macros[macro] = []
                     continue
+                if ll[0] == '}':    
+                    print("macro_end")
+                    macro = False
+                    continue
+                if ll[0] == '!' and finalpass:    
+                    print("usemacro: " + ll[1])
+                    self.lines.append("; macro " + ll[1])
+                    for ml in self.macros[ll[1]]:
+                        self.lines.append(ml)
+                    self.lines.append("; endmacro " + ll[1])
+                    continue
+
+                if macro:
+                    self.macros[macro].append(l);
+
+                if finalpass and not macro:
+                    self.lines.append(l)
+
+    def parse(self, genpass):
+        self.pc = 0
+        self.genpass = genpass
+        for l in self.lines:
+
+            if self.genpass:
+                print(l)
+
+            waslabel = False
+
+            la = l.partition(';')[0]
+            ll = la.split()
+
+            if len(ll) == 0: continue
+
+            lb = ll[0].split(':')
+
+            if len(lb) > 1:
+                hi = (self.pc >> 8) & 0xff
+                lo = self.pc & 0xff
+                self.labels[lb[0] + '_hi'] = hi
+                self.labels[lb[0] + '_lo'] = lo
+                print(" " + lb[0] + "_hi @ {0:02x}".format(hi))
+                print(" " + lb[0] + "_lo @ {0:02x}".format(lo))
+                continue
 
                 print(l)
 
-                if ll[0] == 'li':
+            if ll[0] == 'li':
 
-                    if ll[1][0].isnumeric():
-                        v = int(ll[1], 0)
+                if ll[1][0].isnumeric():
+                    v = int(ll[1], 0)
+                else:
+                    waslabel = True
+                    if ll[1] in self.labels:
+                        v = self.labels[ll[1]]
                     else:
-                        waslabel = True
-                        if ll[1] in self.labels:
-                            v = self.labels[ll[1]]
-                        else:
-                            if self.genpass:
-                                print("missing label: ", ll[1])
-                            v = 0
+                        if self.genpass:
+                            print("missing label: ", ll[1])
+                        v = 0
 
-                    if v < 0x80:
-                        self.gen(opcodes['li'] | v)
-                        if waslabel:
-                            self.gen(opcodes['nop'])
-                    else:
-                        self.gen(opcodes['li'] | (v ^ 0x80))
-                        self.gen(opcodes['sh'])
+                if v < 0x80:
+                    self.gen(opcodes['li'] | v)
+                    if waslabel:
+                        self.gen(opcodes['nop'])
+                else:
+                    self.gen(opcodes['li'] | (v ^ 0x80))
+                    self.gen(opcodes['sh'])
 
-                elif ll[0] in opcodes:
-                    self.gen(opcodes[ll[0]])
+            elif ll[0] in opcodes:
+                self.gen(opcodes[ll[0]])
 
-            if not self.genpass:
-                print(self.labels)
+        if not self.genpass:
+            print(self.labels)
 
 # --
  

@@ -1,0 +1,32 @@
+{ precall
+   lpc      ; load pc into b:a
+   swap
+   push     ; push pchi
+   li 7     ; a = 7, b = pclo
+   add      ; a = 7 + pclo
+   swap     ; b = pclo + 7
+   pop      ; a = pchi
+   swap
+   push     ; push pclo
+   li 0
+   add      ; a = pchi + carry
+   swap
+   pop      ; b:a = pc + 7
+   push     ; pclo
+   swap
+   push     ; pchi
+}
+
+{ ret
+   li 1  ; pchi
+   cp
+   swap
+   li 2  ; pclo
+   cp
+   jp    ; b = pchi, a = pclo
+   pop
+   swap  ; return value now in reg b
+   pop   ; remove pclo
+   pop   ; remove pchi
+   swap  ; return value now in reg a
+}
