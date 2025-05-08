@@ -27,7 +27,7 @@
 #define HOWL_SDA		0
 #define HOWL_SCL		1
 
-#define ENABLE_PULLUPS	false // zwolf hosts usually have external pullups
+#define ENABLE_PULLUPS	true
 
 #define I2C_BAUDRATE	100*1000	// 100KHz
 #define I2C_TIMEOUT 	1000000	// us = 1000ms = 1s
@@ -61,8 +61,6 @@ int main(void) {
 	printf("# i2c freq %i\r\n", baudrate);
 	gpio_set_function(HOWL_SDA, GPIO_FUNC_I2C);
 	gpio_set_function(HOWL_SCL, GPIO_FUNC_I2C);
-
-	// external I2C pull-ups are expected
 	gpio_set_pulls(HOWL_SDA, ENABLE_PULLUPS, false);
 	gpio_set_pulls(HOWL_SCL, ENABLE_PULLUPS, false);
 #endif
