@@ -35,11 +35,18 @@ Zwölf modules are implemented as a versatile package that can be soldered surfa
 | Height | 10mm max (including board) |
 | Board Thickness | 0.8mm - 1.6mm |
 
-#### Pinout
+#### Pinout (top)
 
 ```
-1  2  3  4  5  6
-7  8  9  10 11 12
+ _______________________
+| 1 | 2 | 3 | 4 | 5 | 6 |
+| * |   |   |   |   |   |
+|                       |
+|                       |
+|                       |
+|                       |
+|[7]  8   9  10  11  12 |
+`-----------------------'
 ```
 
 | Pin | GPIO | Primary Function | Alternative Function(s) |

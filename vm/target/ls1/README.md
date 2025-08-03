@@ -9,12 +9,12 @@ The LS10 module uses the CH32V003 MCU.
 7  8  9  10 11 12
 ```
 
-| Pin | GPIO | Primary Function | Alternative Function(s) |
+| Pin | GPIO | Primary Function | Alternative Function(s) / Description |
 |-----|------|------------------|-------------------------|
 | 1 | A | Global I2C SCL (slave) | - |
 | 2 | B | Global I2C SDA (slave) | - |
-| 3 | C | Local I2C SCL (master) | GPIO / UART RX |
-| 4 | D | Local I2C SDA (master) | GPIO / UART TX |
+| 3 | C | Local I2C SCL (master) | GPIO / ADC / UART RX |
+| 4 | D | Local I2C SDA (master) | GPIO / ADC / UART TX |
 | 5 | - | GND | Ground |
 | 6 | - | 3V3 | Power |
 | 7 | E | GPIO | USB\_PU |

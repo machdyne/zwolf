@@ -150,7 +150,7 @@ void zw_write8(uint16_t addr, uint8_t data)
 {
 
 	// external FRAM
-	if (addr >= 0x0000 && addr <= 0x2000)
+	if (addr >= 0x0000 && addr <= 0x1fff)
 		fram_write(addr, data);
 
 	// internal SRAM
