@@ -12,6 +12,8 @@ While the modules are built with a variety of MCUs, FPGAs and memories from vari
 
 See [this blog post](https://machdyne.com/2024/11/15/zwolf-mcu-platform/) for more details.
 
+**See the [Sechs](https://github.com/machdyne/sechs) repo for the latest evolution of this project.**
+
 ## Project Components
 
  * SOC - Zwölf implementation in Verilog (for FPGAs)
