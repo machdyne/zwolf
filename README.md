@@ -60,7 +60,7 @@ Zwölf modules are implemented as a versatile package that can be soldered surfa
 | 5 | GND | Ground | | |
 | 6 | 3V3 | Power, 3.3 V | | supplies |
 | 7 | E | Module-specific | GPIO, UART TX³, USB pull-up | only as the module documents; current-limit anything driven² |
-| 8 | F | Module-specific | GPIO, USB D+ | only as the module documents; current-limit anything driven² |
+| 8 | F | Module-specific | GPIO, UART RX³, USB D+ | only as the module documents; current-limit anything driven² |
 | 9 | G | Module-specific | GPIO, USB D− | only as the module documents; current-limit anything driven² |
 | 10 | H | Module-specific | GPIO, INTN, PROG¹ | only as the module documents; current-limit anything driven² |
 | 11 | RESETN | Reset (active low) | | leave open or pull low |
@@ -68,7 +68,7 @@ Zwölf modules are implemented as a versatile package that can be soldered surfa
 
 1. **PROG:** the module's programming pin (SWIO on WCH chips). Which pin carries it depends on the module: pin 10 on LS10; pins 1 and 10 on LS11, which are the same signal. Where PROG shares pin 1, it is only active while the module is in programming mode; otherwise that signal is the Sechs bus SCL, on pin 10 as well.
 2. For example, through a series resistor of about 1 kΩ, as the Sechs spec requires.
-3. A second UART transmit line, for example for debug output.
+3. A second UART: transmit on E, receive on F. For example a debug output, or a serial device that leaves C/D free.
 4. Unless the module's documentation says otherwise.
 5. On some modules pin 12 is connected to ground, so a host that drives it high shorts the supply.
 
